@@ -3,16 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+//The first arg is the "starts with" path
+//The paths within the route modules are appended to the starts with paths
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var devskillsRouter = require('./routes/devskills');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+//anytime you see 'use' is middleware function
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/devskills', devskillsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
