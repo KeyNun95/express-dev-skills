@@ -9,5 +9,6 @@ router.get('/', devskillsCtrl.index);
 router.get('/new', devskillsCtrl.new);
 router.get('/:id', devskillsCtrl.show);
 router.post('/', devskillsCtrl.create);
+router.delete('/:id', devskillsCtrl.delete);
 
 module.exports = router;

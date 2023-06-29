@@ -1,14 +1,22 @@
-const Devskill = require('../models/devskill');
+const DevskillModel = require('../models/devskill');
 
 module.exports = {
     index,
     show,
     new: newDevskills,
-    create
+    create,
+    delete: deleteSkill
 };
 
+function deleteSkill(req, res) {
+    DevskillModel.deleteOne(req.params.id);
+    res.redirect('/devskills');
+}
+
 function create(req, res) {
-    res.redirct('/devskills');
+    console.log(req.body, "<_contents of our form");
+    const devskill = DevskillModel.create(req.body)
+    res.redirect(`/devskills/${devskill.id}`);
 }
 
 function newDevskills(req, res) {
@@ -17,12 +25,12 @@ function newDevskills(req, res) {
 
 function show(req, res) {
     res.render('devskills/show', {
-        devskill: Devskill.getOne(req.params.id)
+        devskill: DevskillModel.getOne(req.params.id)
     });
 }
 
 function index(req, res) {
     res.render('devskills/index', {
-        devskills: Devskill.getAll()
+        devskills: DevskillModel.getAll()
     });
 }
